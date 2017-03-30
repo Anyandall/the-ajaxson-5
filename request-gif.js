@@ -17,6 +17,9 @@ function fetchAndDisplayGif(event) {
     // This prevents the form submission from doing what it normally does: send a request (which would cause our page to refresh).
     // Because we will be making our own AJAX request, we dont need to send a normal request and we definitely don't want the page to refresh.
     event.preventDefault();
+    setGifLoadedStatus(false);
+    $("#feedback").text("Loading...");
+
 
     // get the user's input text from the DOM
     var searchQuery = $('#tag').val(); // TODO should be e.g. "dance"
@@ -27,7 +30,7 @@ function fetchAndDisplayGif(event) {
     var params = {
         root: "http://api.giphy.com/v1/gifs/search",
         api_key: "dc6zaTOxFJmzC",
-        tag : searchQuery // TODO should be e.g. "jackson 5 dance"
+        tag : "jackson+5+" + searchQuery // TODO should be e.g. "jackson 5 dance"
     };
 
 
@@ -37,6 +40,7 @@ function fetchAndDisplayGif(event) {
         data: params, // attach those extra parameters onto the request
         success: function(response) {
             // if the response comes back successfully, the code in here will execute.
+
 
             // jQuery passes us the `response` variable, a regular javascript object created from the JSON the server gave us
             console.log("we received a response!");
@@ -49,6 +53,7 @@ function fetchAndDisplayGif(event) {
             //$("#gif").attr("src", "https://media.giphy.com/media/gw3IWyGkC0rsazTi/giphy.gif");
             $("#gif").attr("src", "https://media.giphy.com/media/" + response.data[0].id + "/giphy.gif")
             // 2. hide the feedback message and display the image
+
             setGifLoadedStatus(true)
         },
         error: function() {

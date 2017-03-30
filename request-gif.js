@@ -36,7 +36,7 @@ function fetchAndDisplayGif(event) {
 
     // make an ajax request for a random GIF
     $.ajax({
-        url: params.root + "?q=" + params.tag + "&api_key=" + params.api_key + "&limit=1", // TODO where should this request be sent?
+        url: params.root + "?q=" + params.tag + "&api_key=" + params.api_key + "&limit=25", // TODO where should this request be sent?
         data: params, // attach those extra parameters onto the request
         success: function(response) {
             // if the response comes back successfully, the code in here will execute.
@@ -45,13 +45,14 @@ function fetchAndDisplayGif(event) {
             // jQuery passes us the `response` variable, a regular javascript object created from the JSON the server gave us
             console.log("we received a response!");
             console.log(response);
+            var item = response.data[Math.floor(Math.random()*response.data.length)].id;
 
             // TODO
             // 1. set the source attribute of our image to the image_url of the GIF
             //$("#gif").attr("src", response.data[0].url + "/giphy.gif");
             //$("#gif").attr("src", "https://www.w3schools.com/css/trolltunga.jpg");
             //$("#gif").attr("src", "https://media.giphy.com/media/gw3IWyGkC0rsazTi/giphy.gif");
-            $("#gif").attr("src", "https://media.giphy.com/media/" + response.data[0].id + "/giphy.gif")
+            $("#gif").attr("src", "https://media.giphy.com/media/" + item + "/giphy.gif")
             // 2. hide the feedback message and display the image
 
             setGifLoadedStatus(true)

@@ -19,6 +19,7 @@ function fetchAndDisplayGif(event) {
     event.preventDefault();
     if ($('#valid').val() == 5) {
       setGifLoadedStatus(false);
+      $("#error").text("");
       $("#feedback").text("Loading...");
 
 
@@ -68,6 +69,10 @@ function fetchAndDisplayGif(event) {
       });
     } else {
       console.log("didn't complete captcha")
+      setGifLoadedStatus(false)
+      $("#error").text("Didn't complete captcha.")
+      $("#feedback").text("");
+
     }
 
 
@@ -85,4 +90,5 @@ function fetchAndDisplayGif(event) {
 function setGifLoadedStatus(isCurrentlyLoaded) {
     $("#gif").attr("hidden", !isCurrentlyLoaded);
     $("#feedback").attr("hidden", isCurrentlyLoaded);
+    $("#error").attr("hidden", isCurrentlyLoaded)
 }

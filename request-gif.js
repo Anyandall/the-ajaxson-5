@@ -30,6 +30,7 @@ function fetchAndDisplayGif(event) {
         tag : searchQuery // TODO should be e.g. "jackson 5 dance"
     };
 
+
     // make an ajax request for a random GIF
     $.ajax({
         url: params.root + "?q=" + params.tag + "&api_key=" + params.api_key + "&limit=1", // TODO where should this request be sent?
@@ -43,11 +44,12 @@ function fetchAndDisplayGif(event) {
 
             // TODO
             // 1. set the source attribute of our image to the image_url of the GIF
-            $("#gif").attr("src", response.data[0].url);
+            //$("#gif").attr("src", response.data[0].url + "/giphy.gif");
+            //$("#gif").attr("src", "https://www.w3schools.com/css/trolltunga.jpg");
+            //$("#gif").attr("src", "https://media.giphy.com/media/gw3IWyGkC0rsazTi/giphy.gif");
+            $("#gif").attr("src", "https://media.giphy.com/media/" + response.data[0].id + "/giphy.gif")
             // 2. hide the feedback message and display the image
-            $("#gif").show();
-            console.log("tried to show #gif")
-            $("#feedback").toggle();
+            setGifLoadedStatus(true)
         },
         error: function() {
             // if something went wrong, the code in here will execute instead of the success function

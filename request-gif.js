@@ -18,6 +18,7 @@ function fetchAndDisplayGif(event) {
     // Because we will be making our own AJAX request, we dont need to send a normal request and we definitely don't want the page to refresh.
     event.preventDefault();
     if ($('#valid').val() == 5) {
+      $("#valid").css("border-color", "initial");
       setGifLoadedStatus(false);
       $("#error").text("");
       $("#feedback").text("Loading...");
@@ -70,7 +71,8 @@ function fetchAndDisplayGif(event) {
     } else {
       console.log("didn't complete captcha")
       setGifLoadedStatus(false)
-      $("#error").text("Didn't complete captcha.")
+      $("#valid").css("border-color", "red")
+      $("#error").text("Incorrect captcha response. Are you human?")
       $("#feedback").text("");
 
     }
